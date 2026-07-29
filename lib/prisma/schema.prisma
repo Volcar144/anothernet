@@ -1,0 +1,14 @@
+model url {
+  address   String   @id
+  prompt    String
+  html      String
+  createdAt DateTime @default(now())
+  updatedAt temporal.updatedAt()
+}
+
+model domain {
+  domain    String   @id
+  style     String
+  createdAt DateTime @default(now())
+  updatedAt temporal.updatedAt()
+}
