@@ -30,7 +30,7 @@ export default async function Page({
                 <div className="w-full h-1/8 flex flex-col items-center justify-center bg-white">
                     <UrlBar domain={`https://${url}`}/>
                 </div>
-                <div>
+                <div className="w-screen">
                     <SiteViewer url={url} referrerURL={ref}/>
                 </div>
             </div>
