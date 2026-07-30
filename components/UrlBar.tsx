@@ -46,7 +46,7 @@ export default function UrlBar({domain} : {domain: string}) {
                         control={form.control}
                         render={({ field, fieldState}) => (
                             <Field data-invalid={fieldState.invalid}>
-                                <InputGroup className="max-w-xs">
+                                <InputGroup className="max-w-md w-s">
                                     <InputGroupInput
                                         {...field}
                                         aria-invalid={fieldState.invalid}
