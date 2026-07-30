@@ -38,9 +38,9 @@ export default function UrlBar({domain} : {domain: string}) {
     }
 
     return (
-        <div >
-            <form id="urlbar-form" onSubmit={form.handleSubmit(onSubmit)} className="w-1/9">
-                <FieldGroup>
+        <div className="w-full">
+            <form id="urlbar-form" onSubmit={form.handleSubmit(onSubmit)} className="w-full">
+                <FieldGroup className="w-full">
                     <Controller
                         name="url"
                         control={form.control}
