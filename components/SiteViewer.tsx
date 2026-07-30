@@ -21,6 +21,7 @@ export default async function SiteViewer({url, referrerURL}: {url: string, refer
             body: JSON.stringify({ url }),
         });
         console.log("cacheRes status:", cacheRes.status);
+        const token = process.env.API_TOKEN
 
         if (cacheRes.ok) {
             const text = await streamToString(cacheRes.body);
@@ -34,7 +35,7 @@ export default async function SiteViewer({url, referrerURL}: {url: string, refer
                     const genRes = await fetch("https://anothernet.archiem.top/api/generatePage", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({ url, referrerURL }),
+                        body: JSON.stringify({ url, referrerURL, token}),
                     });
                     console.log("genRes status:", genRes.status);
 

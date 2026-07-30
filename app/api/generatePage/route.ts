@@ -11,17 +11,22 @@ export async function POST(req: NextRequest) {
     interface generatePageRequestBody{
         url: string;
         referredFrom?:string;
+        token: string;
     }
 
     // Get the request body and format it
     const body = await streamToString(req.body)
-    let parsed: generatePageRequestBody = {url: ""}
+    let parsed: generatePageRequestBody = {url: "", token: ""}
 
     try {
         // Parse it into a typed object
         parsed = JSON.parse(`${body}`)
     } catch (Error){
         return NextResponse.json({error: "Error occurred while parsing JSON"}, {status: 400})
+    }
+
+    if(parsed.token != process.env.API_TOKEN){
+        return NextResponse.json({error: "Token is invalid"}, {status:401})
     }
 
     if(parsed.url === ""){
