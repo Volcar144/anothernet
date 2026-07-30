@@ -1,3 +1,5 @@
+"use client"
+
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import Spinner from "@/components/Spinner";
 import {useEffect, useState} from "react";
