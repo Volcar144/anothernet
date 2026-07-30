@@ -39,6 +39,7 @@
     "eslint-config-next": "16.2.12",
     "prisma-next": "^0.16.0",
     "tailwindcss": "^4",
+    "tailwindcss-animate": "^1.0.7",
     "typescript": "^5"
   },
   "allowScripts": {
