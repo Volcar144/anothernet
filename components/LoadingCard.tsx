@@ -25,7 +25,7 @@ export default function LoadingCard(){
     }, []);
 
     return (
-        <div>
+        <div className="w-full min-h-screen flex flex-col items-center justify-center ">
             <Card className="w-1/7 h-1/5">
                 <CardHeader>
                     <CardTitle>

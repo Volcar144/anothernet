@@ -38,31 +38,33 @@ export default function UrlBar({domain} : {domain: string}) {
     }
 
     return (
-        <form id="urlbar-form" onSubmit={form.handleSubmit(onSubmit)}>
-            <FieldGroup>
-                <Controller
-                    name="url"
-                    control={form.control}
-                    render={({ field, fieldState}) => (
-                        <Field data-invalid={fieldState.invalid}>
-                            <InputGroup className="max-w-xs">
-                                <InputGroupInput
-                                    {...field}
-                                    aria-invalid={fieldState.invalid}
-                                    autoComplete="off"
-                                    placeholder="https://......." id="urlbar-in"
-                                />
-                                <InputGroupAddon>
-                                    <Search/>
-                                </InputGroupAddon>
-                                {fieldState.invalid && (
-                                    <FieldError errors={[fieldState.error]} />
-                                )}
-                            </InputGroup>
-                        </Field>
-                    )}
-                />
-            </FieldGroup>
-        </form>
+        <div >
+            <form id="urlbar-form" onSubmit={form.handleSubmit(onSubmit)} className="w-1/9">
+                <FieldGroup>
+                    <Controller
+                        name="url"
+                        control={form.control}
+                        render={({ field, fieldState}) => (
+                            <Field data-invalid={fieldState.invalid}>
+                                <InputGroup className="max-w-xs">
+                                    <InputGroupInput
+                                        {...field}
+                                        aria-invalid={fieldState.invalid}
+                                        autoComplete="off"
+                                        placeholder="https://......." id="urlbar-in"
+                                    />
+                                    <InputGroupAddon>
+                                        <Search/>
+                                    </InputGroupAddon>
+                                    {fieldState.invalid && (
+                                        <FieldError errors={[fieldState.error]} />
+                                    )}
+                                </InputGroup>
+                            </Field>
+                        )}
+                    />
+                </FieldGroup>
+            </form>
+        </div>
     )
 }
