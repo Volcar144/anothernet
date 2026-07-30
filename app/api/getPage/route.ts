@@ -1,6 +1,7 @@
 import { db } from "@/lib/prisma/db"
 import {NextRequest, NextResponse} from "next/server";
 import {streamToString} from "@/lib/utils";
+import {getPostHogClient} from "@/lib/posthog-server";
 
 export async function POST(req: NextRequest){
 
@@ -26,6 +27,12 @@ export async function POST(req: NextRequest){
         if(site == null){
             return NextResponse.json({body: "Site does not exist in the database"}, {status: 404})
         } else {
+            const posthog = getPostHogClient()
+            if (posthog) {
+                posthog.capture({event: "site_page_loaded"})
+                await posthog.flush()
+            }
+
             return NextResponse.json({body: site.html}, {status: 200})
         }
     } catch(err){

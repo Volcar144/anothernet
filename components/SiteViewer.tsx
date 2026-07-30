@@ -15,7 +15,7 @@ export default async function SiteViewer({url, referrerURL}: {url: string, refer
     }
 
     try {
-        const cacheRes = await fetch("http://localhost:3000/api/getPage", {
+        const cacheRes = await fetch("https://anothernet.archiem.top/api/getPage", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ url }),
@@ -31,7 +31,7 @@ export default async function SiteViewer({url, referrerURL}: {url: string, refer
                 error = true;
             } else {
                 try {
-                    const genRes = await fetch("http://localhost:3000/api/generatePage", {
+                    const genRes = await fetch("https://anothernet.archiem.top/api/generatePage", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({ url, referrerURL }),

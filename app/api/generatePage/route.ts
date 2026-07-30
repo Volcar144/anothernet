@@ -2,7 +2,9 @@ import {NextRequest, NextResponse} from "next/server";
 import {extractStyleScheme, getDomain, streamToString, stripProtocol} from "@/lib/utils";
 import {db} from "@/lib/prisma/db";
 import {defaultModel, defaultSystemPrompt, makeRequest} from "@/lib/ai";
+import {getPostHogClient} from "@/lib/posthog-server";
 
+export const maxDuration = 150;
 
 export async function POST(req: NextRequest) {
 
@@ -84,6 +86,15 @@ export async function POST(req: NextRequest) {
         })
     } catch(err){
         return NextResponse.json({error: `DB error occurred while creating site record ${err}`}, {status:500})
+    }
+
+    const posthog = getPostHogClient()
+    if (posthog) {
+        posthog.capture({
+            event: "site_generation_completed",
+            properties: {referred_from_anothernet_page: isreferred},
+        })
+        await posthog.flush()
     }
 
     return NextResponse.json({html: aiResponse}, {status: 200})

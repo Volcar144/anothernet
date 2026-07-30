@@ -12,6 +12,7 @@ import * as z from "zod"
 import {Controller, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import { useRouter } from 'next/navigation'
+import posthog from "posthog-js"
 
 const formSchema = z.object({
     url: z.httpUrl()
@@ -29,6 +30,7 @@ export default function SubmitUrl() {
     })
 
     function onSubmit(data: z.infer<typeof formSchema>){
+        posthog.capture("site_url_submitted")
         const httpsRemoved = data.url.replace("https://", "");
         const httpRemoved = httpsRemoved.replace("http://", "");
         router.push(`/${httpRemoved}`);
