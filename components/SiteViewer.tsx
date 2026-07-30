@@ -41,7 +41,8 @@ export default async function SiteViewer({url, referrerURL}: {url: string, refer
                     if (genRes.ok) {
                         const text = await streamToString(genRes.body);
                         console.log("genRes body:", text);
-                        toRender = JSON.parse(text);
+                        const parsed = JSON.parse(text);
+                        toRender = { body: parsed.body ?? parsed.html ?? ""}
                     } else {
                         error = true;
                     }
@@ -56,7 +57,7 @@ export default async function SiteViewer({url, referrerURL}: {url: string, refer
         error = true;
     }
 
-    if(toRender.body === ""){
+    if (!toRender?.body || toRender.body.trim() === "") {
         error = true;
     }
 
