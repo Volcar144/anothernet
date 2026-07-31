@@ -2,7 +2,7 @@
 
 import SubmitUrl from "@/components/submitUrl";
 import {useEffect} from "react";
-import {Button} from "@base-ui/react";
+import {Button} from "@/components/ui/button";
 import {streamToString} from "@/lib/utils";
 import {error} from "next/dist/build/output/log";
 
@@ -42,10 +42,11 @@ export default function Home() {
               <h1 className="text-5xl dark:text-white">Welcome to <b className="font-bold text-5xl dark:text-white">AnotherNet</b></h1>
               <h3 className="text-lg italic dark:text-white">AnotherNet, Another World</h3>
           </div>
-          <div className="flex flex-row gap-2 w-screen h-3">
+          <div className="flex flex-col gap-5 w-screen h-3">
               <SubmitUrl />
+              <Button onClick={() => {window.location.href == `/${randomSite}`}} disabled={buttonDisabled} variant="default" size="default">Go somewhere random?</Button>
           </div>
-          <Button onClick={() => {window.location.href == `/${randomSite}`}} disabled={buttonDisabled} className="bg-black rounded-md w-1/10 h-1/13">Go somewhere random?</Button>
+
       </main>
     </div>
   );
