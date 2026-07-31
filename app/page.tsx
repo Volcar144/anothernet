@@ -42,9 +42,9 @@ export default function Home() {
               <h1 className="text-5xl dark:text-white">Welcome to <b className="font-bold text-5xl dark:text-white">AnotherNet</b></h1>
               <h3 className="text-lg italic dark:text-white">AnotherNet, Another World</h3>
           </div>
-          <div className="flex flex-col gap-5 w-screen h-3">
+          <div className="flex flex-row gap-2 w-screen h-3">
               <SubmitUrl />
-              <Button onClick={() => {window.location.href == `/${randomSite}`}} disabled={buttonDisabled}>Go somewhere random?</Button>
+              <Button onClick={() => {window.location.href == `/${randomSite}`}} disabled={buttonDisabled} className="bg-black rounded-md">Go somewhere random?</Button>
           </div>
       </main>
     </div>
