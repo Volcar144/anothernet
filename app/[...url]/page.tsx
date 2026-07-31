@@ -26,15 +26,7 @@ export default async function Page({
 
     return (
         <Suspense fallback={<LoadingCard/>}>
-            <div className="w-full min-h-screen rounded-4xl border-10 border-white flex flex-col">
-                <div className="w-full h-1/8 flex flex-col items-center justify-center bg-white">
-                    <UrlBar domain={`https://${url}`} />
-                </div>
-                <div className="w-full">
-                    <SiteViewer url={url} referrerURL={ref} />
-                </div>
-            </div>
-
+            <SiteViewer url={url} referrerURL={ref}/>
         </Suspense>
     );
 }
