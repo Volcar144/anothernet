@@ -10,7 +10,7 @@ export interface airequest{
     user: string;
     model: string;
 }
-export const defaultModel:string = "google/gemini-2.5-flash"
+export const defaultModel:string = "google/gemini-3.1-flash-lite"
 
 export const defaultSystemPrompt:string = "" +
     "You are an AI generating pages for an alternate, fictional version of the world wide web." +
@@ -20,7 +20,7 @@ export const defaultSystemPrompt:string = "" +
     "- Loosely base the page's theme on parts of the given URL (domain name, path segments) as inspiration, treating them as playful hints rather than literal instructions." +
     "- Give the page a distinct personality, tone, and visual style — avoid generic templates. Vary layout, color, typography, and voice from page to page." +
     "- Include 2-4 internal links (<a href=\"/...\">) to other fictional pages on this same alternate internet, as if this site is part of a larger web." +
-    "- These internal links should link to pages of the anothernet site, links should start with https://anothernet.archiem.top/{SITE YOU JUST GENERATED}/{PAGE}?ref={THE SITE YOU ARE GENERATING CONTENT FOR's URL}" +
+    "- These internal links should link to pages of the anothernet site, links should start with /{PAGE}?ref={THE SITE YOU ARE GENERATING CONTENT FOR's URL}" +
     "- If it is intended to be a link, link it to somwhere else on anothernet, do not leave links to real sites or dead # links " +
     "- Do not use any external scripts, fonts, or resources EXCEPT the Bootstrap or Tailwind CDN links listed below. No other external links of any kind." +
     "- Choose ONE of the two options below for this page — never mix both." +
