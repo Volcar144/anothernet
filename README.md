@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Welcome to AnotherNet
+## A website on a mission to make a new web
 
-## Getting Started
+This project is rather simple, it just generates pages that you want to visit using AI, then stores them in a db
 
-First, run the development server:
+### Technical
+**anothernet** uses prisma-next for db queries and hackclub ai(via openrouter sdk) for AI queries. The project runs on nextjs.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### Try it out
+You can try anothernet out by clicking [here](https://anothernet.archiem.top) or going to https://anothernet.archiem.top
+
+### Running it yourself
+I don't know why you would want to but here's how to run it yourself (quick note, you will need hackclub ai to run this project:
+
+Start by cloning the repo from github
+```shell
+git clone https://github.com/Volcar144/anothernet.git
+cd anothernet
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then create a .env file and populate it like the following: 
+```js
+    HACKCLUB_AI_API_KEY='xxxx'
+    DATABASE_URL='postgresql://xxxxxxxx'
+    DATABASE_PASSWORD='xxxxxxxxxxxx' //Optional
+    NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN=phc_xxxxxxxxx
+    NEXT_PUBLIC_POSTHOG_HOST=
+    MODERATION_ENABLED='true'
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Once you have your database sorted, go ahead and run:
+```shell
+npm install
+npx prisma-next contract emit
+npx prisma-next db init
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Then you can:
+```shell
+npm run dev
+```

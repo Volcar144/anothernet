@@ -72,21 +72,23 @@ export async function POST(req: NextRequest) {
         }
     }
 
-    const blockedReq = await makeRequest({
-        system: modSystemPrompt,
-        model:modModel,
-        user: `Domain for you to process: ${parsed.url}`
-    })
+    if(process.env.MODERATION_ENABLED == "true"){
+        const blockedReq = await makeRequest({
+            system: modSystemPrompt,
+            model:modModel,
+            user: `Domain for you to process: ${parsed.url}`
+        })
 
-    try {
-        const isBlocked:boolean = parseBoolean( blockedReq)
+        try {
+            const isBlocked:boolean = parseBoolean( blockedReq)
 
-        console.log(blockedReq + " " + isBlocked)
-        if(isBlocked){
-            return NextResponse.json({body: "Query blocked"}, {status: 422, statusText: "Request body unprocessable"})
+            console.log(blockedReq + " " + isBlocked)
+            if(isBlocked){
+                return NextResponse.json({body: "Query blocked"}, {status: 422, statusText: "Request body unprocessable"})
+            }
+        } catch {
+            return NextResponse.json({body: "Failed to parse ai blocked response"}, {status:500})
         }
-    } catch {
-        return NextResponse.json({body: "Failed to parse ai blocked response"}, {status:500})
     }
 
 
