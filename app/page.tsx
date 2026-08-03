@@ -44,7 +44,7 @@ export default function Home() {
           </div>
           <div className="flex flex-col gap-5 w-screen h-3">
               <SubmitUrl />
-              <Button onClick={() => {window.location.href == `/${randomSite}`}} disabled={buttonDisabled} variant="default" size="default">Go somewhere random?</Button>
+              <Button onClick={() => {window.location.href = `/${randomSite}`}} disabled={buttonDisabled} variant="default" size="default" className="w-5">Go somewhere random?</Button>
           </div>
 
       </main>
