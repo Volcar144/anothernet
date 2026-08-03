@@ -1,12 +1,14 @@
 import {NextRequest, NextResponse} from "next/server";
-import {extractStyleScheme, getDomain, streamToString, stripProtocol} from "@/lib/utils";
+import {extractStyleScheme, getDomain, parseBoolean, streamToString, stripProtocol} from "@/lib/utils";
 import {db} from "@/lib/prisma/db";
-import {defaultModel, defaultSystemPrompt, makeRequest} from "@/lib/ai";
+import {defaultModel, defaultSystemPrompt, makeRequest, modModel, modSystemPrompt} from "@/lib/ai";
 import {getPostHogClient} from "@/lib/posthog-server";
 
 export const maxDuration = 150;
 
 export async function POST(req: NextRequest) {
+
+    const isPaused = false;
 
     interface generatePageRequestBody{
         url: string;
@@ -17,6 +19,10 @@ export async function POST(req: NextRequest) {
     // Get the request body and format it
     const body = await streamToString(req.body)
     let parsed: generatePageRequestBody = {url: "", token: ""}
+
+    if(isPaused){
+        return NextResponse.json({body: "System is paused"}, {status: 401, statusText: "System paused temporarily"})
+    }
 
     try {
         // Parse it into a typed object
@@ -65,6 +71,20 @@ export async function POST(req: NextRequest) {
             input = `${parsed.url} redirected from ${parsed.referredFrom}, external website is not referrer of current website. No style dictation`
         }
     }
+
+    const blockedReq = await makeRequest({
+        system: modSystemPrompt,
+        model:modModel,
+        user: `Domain for you to process: ${parsed.url}`
+    })
+
+    const isBlocked:boolean = parseBoolean(blockedReq)
+
+    if(isBlocked){
+        return NextResponse.json({body: "Query blocked"}, {status: 422, statusText: "Request body unprocessable"})
+    }
+
+
 
     const aiResponse = await makeRequest({
         system: defaultSystemPrompt,

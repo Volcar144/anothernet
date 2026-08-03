@@ -12,3 +12,4 @@ model domain {
   createdAt DateTime @default(now())
   updatedAt temporal.updatedAt()
 }
+

@@ -1,7 +1,8 @@
 import {NextResponse} from "next/server";
 import {streamToString} from "@/lib/utils";
-import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
-import {CircleX} from "lucide-react"
+import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
+import {CircleX, ShieldX} from "lucide-react"
+import {Button} from "@/components/ui/button";
 
 
 export default async function SiteViewer({url, referrerURL}: {url: string, referrerURL: string}) {
@@ -45,6 +46,37 @@ export default async function SiteViewer({url, referrerURL}: {url: string, refer
                         const parsed = JSON.parse(text);
                         toRender = { body: parsed.body ?? parsed.html ?? ""}
                     } else {
+                        if(genRes.status == 422) {
+                            return (
+                                <div className="w-screen min-h-screen flex flex-col items-center justify-center">
+                                    <Card className="flex flex-col w-1/5 h-1/4">
+                                        <CardHeader>
+                                            <CardTitle>
+                                                <ShieldX color="#ff0000" />
+                                            </CardTitle>
+                                        </CardHeader>
+                                        <CardContent>
+                                            <h2 className="text-2xl dark:text-white">
+                                                Request Blocked
+                                            </h2>
+                                            <p className="text-lg text-gray-500">Request determined to be risky or unsafe by ai.</p>
+                                        </CardContent>
+                                        <CardFooter>
+                                            <Button
+                                                size="lg"
+                                                className="w-full"
+                                                variant="destructive"
+                                                onClick={() => {
+                                                    window.location.href = "/"
+                                                }}
+                                            >
+                                                Go home
+                                            </Button>
+                                        </CardFooter>
+                                    </Card>
+                                </div>
+                            )
+                        }
                         error = true;
                     }
                 } catch (err) {
