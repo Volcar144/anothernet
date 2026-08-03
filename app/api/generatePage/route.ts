@@ -78,10 +78,15 @@ export async function POST(req: NextRequest) {
         user: `Domain for you to process: ${parsed.url}`
     })
 
-    const isBlocked:boolean = parseBoolean(blockedReq)
+    try {
+        const isBlocked:boolean = parseBoolean(blockedReq)
 
-    if(isBlocked){
-        return NextResponse.json({body: "Query blocked"}, {status: 422, statusText: "Request body unprocessable"})
+        console.log(blockedReq + " " + isBlocked)
+        if(isBlocked){
+            return NextResponse.json({body: "Query blocked"}, {status: 422, statusText: "Request body unprocessable"})
+        }
+    } catch {
+        return NextResponse.json({body: "Failed to parse ai blocked response"}, {status:500})
     }
 
 
