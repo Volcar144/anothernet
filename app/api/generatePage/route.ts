@@ -79,7 +79,7 @@ export async function POST(req: NextRequest) {
     })
 
     try {
-        const isBlocked:boolean = parseBoolean(blockedReq)
+        const isBlocked:boolean = parseBoolean( blockedReq)
 
         console.log(blockedReq + " " + isBlocked)
         if(isBlocked){
