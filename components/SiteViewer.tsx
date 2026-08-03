@@ -61,18 +61,6 @@ export default async function SiteViewer({url, referrerURL}: {url: string, refer
                                             </h2>
                                             <p className="text-lg text-gray-500">Request determined to be risky or unsafe by ai.</p>
                                         </CardContent>
-                                        <CardFooter>
-                                            <Button
-                                                size="lg"
-                                                className="w-full"
-                                                variant="destructive"
-                                                onClick={() => {
-                                                    window.location.href = "/"
-                                                }}
-                                            >
-                                                Go home
-                                            </Button>
-                                        </CardFooter>
                                     </Card>
                                 </div>
                             )
